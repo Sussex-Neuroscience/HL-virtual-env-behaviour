@@ -3,8 +3,11 @@ from psychopy import core, visual, event, monitors, data, gui
 import random, math, sys
 from os import path
 import numpy as np
-from psychopy.iohub.devices.daq.hw.labjack.win32.python27.pylabjack import u12
+#from psychopy.iohub.devices.daq.hw.labjack.win32.python27.pylabjack import u12
+
+##########maybe use the library below for python3####################
 #from LabJackPython import u12
+
 # go to API from the HELP drop menu to get information about the libraries and functions
 # Demos -- timing -- TimeByFrames.py
 
@@ -13,7 +16,7 @@ mon= monitors.Monitor('stimMonitor')
 mon.setDistance(17.0)
 win=visual.Window([1920,1080], monitor=mon, fullscr=True, units='deg',waitBlanking=False, screen = 1)
 win2=visual.Window([1920,1080], monitor=mon, fullscr=True, units='deg',waitBlanking=False, screen =2 )
-# Laptop: [1024,7 68]
+# Laptop: [1024,768]
 # Stimulus computer: [1920,1080]
 
 #-------------------------------------------------------------------------#
@@ -99,10 +102,12 @@ info['NumOfStim'] = len(tf)
 ##########################################################################################################################
 # --------------------------------------------Setting Up LabJack ------------------------------------------------------- #
 
+
+##################SET THIS BACK ON WHEN TESTING ON SETUP######################################
 #setup labjack U12
-d = u12.U12(debug = False)
-d.eDigitalOut(channel=1, state=0, writeD=0)
-d.eDigitalOut(channel=3, state=0, writeD=0)
+#d = u12.U12(debug = False)
+#d.eDigitalOut(channel=1, state=0, writeD=0)
+#d.eDigitalOut(channel=3, state=0, writeD=0)
 
 # --------------------------------------------                   ------------------------------------------------------- #
 
@@ -117,7 +122,7 @@ d.eDigitalOut(channel=3, state=0, writeD=0)
 #||||#~~~~~~~~~~~~~~~~~#||||#
 #||||#|||||||||||||||||#||||#
 
-d.eDigitalOut(channel=1, state=1, writeD=0)
+#d.eDigitalOut(channel=1, state=1, writeD=0)
 
 # initialise the gratings
 gratings = visual.GratingStim(win, units='deg', mask=info['mask'], tex=info['tex'], pos=info['Position'], ori=info['orientations'])
@@ -130,7 +135,7 @@ for frameN in range(info['PreStim']):
     win.flip()
     win2.flip()
 
-d.eDigitalOut(channel=1, state=0, writeD=0)
+#d.eDigitalOut(channel=1, state=0, writeD=0)
 #d.eDigitalOut(channel=3, state=0, writeD=0)
 for NumTrials in range(info['NumOfTrials']):
 
@@ -142,7 +147,7 @@ for NumTrials in range(info['NumOfTrials']):
         
     
     for thisTrial in range(info['NumOfStim']):
-        d.eDigitalOut(channel=3, state=1, writeD=0)
+        #d.eDigitalOut(channel=3, state=1, writeD=0)
         
         for frameN in range(info['StimLength']):
             
@@ -170,13 +175,13 @@ for NumTrials in range(info['NumOfTrials']):
                 core.quit() # escape stimulus if you press 'q'
                 win.flip()
                 win2.flip()
-        d.eDigitalOut(channel=3, state=0, writeD=0)
+        #d.eDigitalOut(channel=3, state=0, writeD=0)
         
         for frameN in range(info['ISI']):
             win.flip()
             win2.flip()
             
-        d.eDigitalOut(channel=3, state=1, writeD=0)
+        #d.eDigitalOut(channel=3, state=1, writeD=0)
         
         print (tf [TF])
         TF += 1
@@ -186,5 +191,5 @@ for NumTrials in range(info['NumOfTrials']):
         
     
     
-d.eDigitalOut(channel=3, state=0, writeD=0)
+#d.eDigitalOut(channel=3, state=0, writeD=0)
 #d.eDigitalOut(channel=1, state=1, writeD=1)
