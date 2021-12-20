@@ -16,7 +16,23 @@ A behavioural task for mice in virtual environments
 ---
 ## project log
 
+## **15/12/21** Set of tasks for updated rig
 
+- Virtual environemt to be developed in Bonsai-rx/Bonvision
+  - long corridor, and with a placed object that changes places from trial to trial.
+
+- Sensors and acuators
+  - lick sensor (capacitance sensor)
+  - reward delivery system (solenoid valve)
+  - rotary encoder for the threadmill
+
+- Bonsai integration / Beehive
+  - send triggers to recording system
+  - camera for pupillometry (Rpi, but we could use a regular webcam)
+  - IR led system to illuminate the eye.
+
+- current analysis pipeline
+- Matlab
 
 ## **30/07/21** Psychopy update and labjack
 - we spent some time updating Psychopy to its newest version, using Python3. This went fairly smooth using Anaconda and the listed instructions below.
