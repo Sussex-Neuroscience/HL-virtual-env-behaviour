@@ -34,7 +34,7 @@ wall = 4;
 
 holH = 10;
 
-poleDia = 12.9;
+poleDia = 25;
 poleHei = 30;
 
 
