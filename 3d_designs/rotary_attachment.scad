@@ -6,7 +6,7 @@
 
 
 //sides on a cylinder
-$fn=30;
+$fn=100;
 
 //tolerance
 tol = 0.1;
@@ -18,8 +18,8 @@ wall_t = 2;
 rot_axis_d = 4;
 rot_axis_l = 10;
 
-rot_body_d = 20;
-rot_body_l = 10;
+rot_body_d = 24;
+rot_body_l = 20;
 
 //whell connection dimensions
 wheel_axis_d = 4.5;
@@ -55,13 +55,13 @@ module poleFit(){
         translate([0,0,-1]){
         cylinder(d=poleDia+2*tol,h=poleHei+5);
         }//end translate
-    translate([-(poleDia),0,poleHei/2+1]){
+    translate([-(poleDia),0,nutDia+0.5]){
         rotate([0,90,0]){
-        cylinder(d=screwDia+1,h=poleDia+20);
+        cylinder(d=screwDia+0.5,h=poleDia+40);
         }//end rotate
     }//end translate
     }//end difference
-    translate([(poleDia+10)/2+2.5,0,6.45]){
+    translate([(poleDia+10)/2+2.5,0,nutDia-0.455]){
         nutpocket();
     }//end translate
 }//end module
@@ -109,20 +109,23 @@ cylinder(d=wheel_axis_d+2*tol,h=wheel_axis_l);
 
 //axis_fit();
 
-/*
-//rotary body holder
+
+module encoder_holder(){
 difference(){
 cylinder(d=rot_body_d+2*wall_t,h=rot_body_l);
 translate([0,0,1]){
 cylinder(d=rot_body_d+2*tol,h=rot_body_l+wall_t+1);
 }//end translate
 translate([0,-5,wall_t]){
-cube([30,10,10]);
+cube([rot_body_l,10,rot_body_l+5]);
 }//end translate
 }//end difference
+}//end module
 
+translate([-16.5,0,25])
+rotate([0,90,180])
+encoder_holder();
 
-*/
 poleFit();
 
 /*
