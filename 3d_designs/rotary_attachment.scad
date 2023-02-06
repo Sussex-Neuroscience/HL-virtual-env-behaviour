@@ -22,8 +22,8 @@ rot_body_d = 24;
 rot_body_l = 20;
 
 //whell connection dimensions
-wheel_axis_d = 4.5;
-wheel_axis_l = 10;
+wheel_axis_d = 6;
+wheel_axis_l = 20;
 
 coupler_d = wheel_axis_d+2*wall_t;
 
@@ -34,7 +34,7 @@ wall = 4;
 
 holH = 10;
 
-poleDia = 25;
+poleDia = 25.4;
 poleHei = 30;
 
 
@@ -51,7 +51,7 @@ nutHei = 3.25;
 
 module poleFit(){
     difference(){
-    cylinder(d=poleDia+10,h=poleHei);
+    cylinder(d=poleDia+wall_t*2,h=poleHei);
         translate([0,0,-1]){
         cylinder(d=poleDia+2*tol,h=poleHei+5);
         }//end translate
@@ -61,7 +61,7 @@ module poleFit(){
         }//end rotate
     }//end translate
     }//end difference
-    translate([(poleDia+10)/2+2.5,0,nutDia-0.455]){
+    translate([(poleDia+wall_t*2)/2+2.5,0,nutDia-0.455]){
         nutpocket();
     }//end translate
 }//end module
@@ -107,7 +107,6 @@ cylinder(d=wheel_axis_d+2*tol,h=wheel_axis_l);
 }
 
 
-//axis_fit();
 
 
 module encoder_holder(){
@@ -122,11 +121,17 @@ cube([rot_body_l,10,rot_body_l+5]);
 }//end difference
 }//end module
 
-translate([-16.5,0,25])
-rotate([0,90,180])
+
+/*
+translate([(-rot_body_l-4*wall_t)/2,0,(rot_body_l+4 *wall_t)/2])
+rotate([0,-90,0])
 encoder_holder();
 
 poleFit();
+*/
+
+axis_fit();
+
 
 /*
 
