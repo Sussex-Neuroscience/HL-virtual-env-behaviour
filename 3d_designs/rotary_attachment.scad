@@ -9,7 +9,7 @@
 $fn=100;
 
 //tolerance
-tol = 0.1;
+tol = 0.15;
 
 //wall thickness
 wall_t = 2;

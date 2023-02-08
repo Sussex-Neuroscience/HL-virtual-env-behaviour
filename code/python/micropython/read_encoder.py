@@ -2,27 +2,56 @@ from machine import Pin
 import time
 
 #declare pin variables
-rot_a_pin = 15
-rot_b_pin = 2
+rotAPin = 15
+rotBPin = 2
+stopButtonPin = 16
+triggerOutPin = 17
 #add a pin as input for the trigger from recording device.
 
 #define pins
-rot_a = Pin(15,Pin.IN)
-rot_b = Pin(2,Pin.IN)
+rotA = Pin(rotAPin,Pin.IN)
+rotB = Pin(rotBPin,Pin.IN)
+stopButton = Pin(stopButtonPin,Pin.IN)
+triggerOut = Pin(triggerOutPin,Pin.OUT)
 
-rot_a_state_old = 0
-rot_a_state_new = 0
+
+oldRotAstate = 0
+newRotAstate = 0
+#rot_a_state_new = 0
 
 #millis --> time1 = time.get
-
+#according to rotary encoder detection 
     ### 62.8 refers to wheel circumference
-    ### 4096 refers to counts per cycle (Kubler)
-    #newPosition = (value/4096) * 62.8
+    ### 1024 refers to counts per cycle (Kubler)
+    ### 2*pi*r total circunference
+    ### minimal steps are 62.8/1024
 
-for i in range(1000):
-    rot_a_state_old = rot_a.value()
-    time.sleep_ms(5)
-    rot_a_state_new =  rot_a.value()
+cyclesRevolution = 1024
+wheelCircun = 62.8
+
+startStep = time.ticks_ms() # get millisecond counter
+endStep = startStep
+
+while 1:
+#while stopButtonPin == 0:
+    StartStep=time.ticks_ms()
+    while newRotAstate == oldRotAstate:
+        newRotAstate = rotA.value()
+        triggerOut.value(0)
+        
+        
+    if newRotAstate == 1 and oldRotAstate == 0:
+        print("rising edge")
+        
+        endStep = time.ticks_ms()
+        
+        duration = endStep-StartStep
+        print(duration)
+        triggerOut.value(1)
+        
+    oldRotAstate = newRotAstate
+    
+
     
     
     
